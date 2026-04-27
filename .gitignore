@@ -1,0 +1,11 @@
+﻿# Flutter/Dart
+.dart_tool/
+.pub/
+build/
+*.lock
+*.iml
+.idea/
+.vscode/
+android/local.properties
+ios/Pods/
+ios/Podfile.lock
