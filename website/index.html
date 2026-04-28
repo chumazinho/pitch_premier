@@ -1,483 +1,68 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pitch Premier - Fantasy Football App</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #0a0a0a;
-            color: white;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #14FFEC;
-            border-radius: 5px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Glassmorphism Header */
-        .header {
-            padding: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(20, 255, 236, 0.2);
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #14FFEC, #0D7377);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .nav a:hover {
-            color: #14FFEC;
-            transform: translateY(-2px);
-        }
-
-        .nav .sign-in {
-            background: transparent;
-            border: 1px solid #14FFEC;
-            padding: 8px 20px;
-            border-radius: 25px;
-        }
-
-        .nav .sign-in:hover {
-            background: #14FFEC;
-            color: #1a1a1a;
-            transform: translateY(-2px);
-        }
-
-        .nav .get-started {
-            background: #14FFEC;
-            color: #1a1a1a;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-        }
-
-        .nav .get-started:hover {
-            transform: translateY(-2px);
-            background: #0D7377;
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 100px 0;
-            text-align: center;
-            background: linear-gradient(135deg, #0a0a0a 0%, #0D7377 100%);
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: #ccc;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        .hero-buttons {
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: #14FFEC;
-            color: #1a1a1a;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin: 10px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            background: #0D7377;
-            color: white;
-            box-shadow: 0 10px 20px rgba(20, 255, 236, 0.2);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #14FFEC;
-            color: #14FFEC;
-        }
-
-        .btn-outline:hover {
-            background: #14FFEC;
-            color: #1a1a1a;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background: #0f0f0f;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 42px;
-            margin-bottom: 20px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #888;
-            margin-bottom: 60px;
-            font-size: 18px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .feature-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            background: rgba(20, 255, 236, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #0D7377, #0a0a0a);
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
-
-        .step {
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.5s ease;
-        }
-
-        .step.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: #14FFEC;
-            color: #1a1a1a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0 auto 20px;
-            transition: all 0.3s ease;
-        }
-
-        .step:hover .step-number {
-            transform: scale(1.1);
-        }
-
-        /* Role Cards */
-        .roles {
-            padding: 100px 0;
-            background: #0f0f0f;
-        }
-
-        .roles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .role-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .role-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .role-card:hover {
-            transform: translateY(-10px);
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0a0a0a; color: white; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .header { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: sticky; top: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(20,255,236,0.2); }
+        .logo { font-size: 28px; font-weight: bold; background: linear-gradient(135deg,#14FFEC,#0D7377); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .nav { display: flex; gap: 30px; align-items: center; flex-wrap: wrap; }
+        .nav a { color: white; text-decoration: none; transition: all 0.3s ease; }
+        .nav a:hover { color: #14FFEC; }
+        .nav .sign-in { background: transparent; border: 1px solid #14FFEC; padding: 8px 20px; border-radius: 25px; }
+        .nav .get-started { background: #14FFEC; color: #1a1a1a; padding: 8px 20px; border-radius: 25px; font-weight: bold; }
+        .hero { padding: 100px 0; text-align: center; background: linear-gradient(135deg,#0a0a0a 0%,#0D7377 100%); }
+        .hero h1 { font-size: 56px; margin-bottom: 20px; }
+        .hero p { font-size: 20px; color: #ccc; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .btn { display: inline-block; padding: 15px 40px; background: #14FFEC; color: #1a1a1a; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease; margin: 10px; cursor: pointer; border: none; }
+        .btn:hover { transform: translateY(-3px); background: #0D7377; color: white; }
+        .btn-outline { background: transparent; border: 2px solid #14FFEC; color: #14FFEC; }
+        .features { padding: 100px 0; background: #0f0f0f; }
+        .section-title { text-align: center; font-size: 42px; margin-bottom: 20px; }
+        .section-subtitle { text-align: center; color: #888; margin-bottom: 60px; font-size: 18px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-10px); background: rgba(20,255,236,0.1); }
+        .feature-icon { font-size: 50px; margin-bottom: 20px; }
+        .how-it-works { padding: 100px 0; background: linear-gradient(135deg,#0D7377,#0a0a0a); }
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 50px; }
+        .step { text-align: center; }
+        .step-number { width: 60px; height: 60px; background: #14FFEC; color: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 20px; }
+        .roles { padding: 100px 0; background: #0f0f0f; }
+        .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .role-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; }
         .role-card.admin { border-top: 4px solid #FF6B6B; }
         .role-card.fantasy { border-top: 4px solid #14FFEC; }
         .role-card.fan { border-top: 4px solid #0D7377; }
-
-        .role-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        /* Pricing */
-        .pricing {
-            padding: 100px 0;
-            background: #0a0a0a;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .pricing-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .pricing-card.featured {
-            background: linear-gradient(135deg, rgba(20, 255, 236, 0.1), rgba(13, 115, 119, 0.1));
-            border: 1px solid #14FFEC;
-        }
-
-        .price {
-            font-size: 48px;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-
-        .price small {
-            font-size: 16px;
-        }
-
-        .pricing-card ul {
-            list-style: none;
-            margin: 30px 0;
-        }
-
-        .pricing-card li {
-            padding: 8px 0;
-            color: #ccc;
-        }
-
-        /* CTA Section */
-        .cta {
-            padding: 100px 0;
-            text-align: center;
-            background: linear-gradient(135deg, #0D7377, #14FFEC);
-        }
-
-        .cta h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        .cta p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: #1a1a1a;
-            animation: fadeInUp 0.6s ease 0.2s both;
-        }
-
-        .cta .btn {
-            background: #1a1a1a;
-            color: #14FFEC;
-            border: none;
-            animation: fadeInUp 0.6s ease 0.4s both;
-        }
-
-        .cta .btn:hover {
-            background: white;
-            color: #1a1a1a;
-            transform: translateY(-3px);
-        }
-
-        /* Download Section */
-        .download-section {
-            padding: 100px 0;
-            background: #0f0f0f;
-            text-align: center;
-        }
-
-        .apk-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 60px 0 40px;
-            background: #0a0a0a;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h4 {
-            margin-bottom: 20px;
-            color: #14FFEC;
-        }
-
-        .footer-column a {
-            display: block;
-            color: #888;
-            text-decoration: none;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .footer-column a:hover {
-            color: #14FFEC;
-            transform: translateX(5px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #888;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 36px; }
-            .section-title { font-size: 32px; }
-            .header { flex-direction: column; }
-            .nav { justify-content: center; }
-            .btn { padding: 12px 25px; }
-        }
+        .role-icon { font-size: 48px; margin-bottom: 20px; }
+        .pricing { padding: 100px 0; background: #0a0a0a; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .pricing-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; }
+        .pricing-card.featured { background: linear-gradient(135deg,rgba(20,255,236,0.1),rgba(13,115,119,0.1)); border: 1px solid #14FFEC; }
+        .price { font-size: 48px; font-weight: bold; margin: 20px 0; }
+        .price small { font-size: 16px; }
+        .pricing-card ul { list-style: none; margin: 30px 0; }
+        .pricing-card li { padding: 8px 0; color: #ccc; }
+        .cta { padding: 100px 0; text-align: center; background: linear-gradient(135deg,#0D7377,#14FFEC); }
+        .cta h2 { font-size: 42px; margin-bottom: 20px; }
+        .cta p { font-size: 18px; margin-bottom: 30px; color: #1a1a1a; }
+        .cta .btn { background: #1a1a1a; color: #14FFEC; }
+        .download-section { padding: 100px 0; background: #0f0f0f; text-align: center; }
+        .apk-card { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; max-width: 500px; margin: 0 auto; }
+        .footer { padding: 60px 0 40px; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-column h4 { margin-bottom: 20px; color: #14FFEC; }
+        .footer-column a { display: block; color: #888; text-decoration: none; margin-bottom: 10px; }
+        .footer-column a:hover { color: #14FFEC; }
+        .footer-bottom { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); color: #888; }
+        @media (max-width: 768px) { .hero h1 { font-size: 36px; } .section-title { font-size: 32px; } .header { flex-direction: column; } .nav { justify-content: center; } }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <div class="container">
         <div class="header">
             <div class="logo">⚽ PITCH PREMIER</div>
@@ -486,25 +71,23 @@
                 <a href="#how-it-works">How It Works</a>
                 <a href="#roles">Roles</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#download" class="sign-in" onclick="showLoginAlert()">Sign In</a>
-                <a href="#download" class="get-started" onclick="showLoginAlert()">Get Started</a>
+                <a href="#" class="sign-in" onclick="openApp()">Sign In</a>
+                <a href="#" class="get-started" onclick="openApp()">Get Started</a>
             </div>
         </div>
     </div>
 
-    <!-- Hero Section -->
     <div class="hero">
         <div class="container">
             <h1>The #1 Fantasy Football App<br>For Nigerian Fans</h1>
             <p>Build your dream team, compete with friends, and experience live matches like never before.</p>
             <div class="hero-buttons">
-                <a href="#download" class="btn" onclick="showLoginAlert()">Start for Free →</a>
+                <a href="#" class="btn" onclick="openApp()">Start for Free →</a>
                 <a href="#features" class="btn btn-outline">Learn More</a>
             </div>
         </div>
     </div>
 
-    <!-- Features Section -->
     <div id="features" class="features">
         <div class="container">
             <h2 class="section-title">Everything you need to dominate</h2>
@@ -520,56 +103,51 @@
         </div>
     </div>
 
-    <!-- How It Works -->
     <div id="how-it-works" class="how-it-works">
         <div class="container">
             <h2 class="section-title">How It Works</h2>
             <p class="section-subtitle">Get started in three simple steps</p>
             <div class="steps-grid">
-                <div class="step"><div class="step-number">1</div><h3>Sign Up</h3><p>Create your free account and choose your role</p></div>
-                <div class="step"><div class="step-number">2</div><h3>Build Team</h3><p>Pick your players within the £100m budget</p></div>
-                <div class="step"><div class="step-number">3</div><h3>Earn Points</h3><p>Watch matches and earn points based on real performance</p></div>
-                <div class="step"><div class="step-number">4</div><h3>Compete</h3><p>Climb the leaderboard and challenge your friends</p></div>
+                <div class="step"><div class="step-number">1</div><h3>Sign Up</h3><p>Create your free account</p></div>
+                <div class="step"><div class="step-number">2</div><h3>Build Team</h3><p>Pick players with £100m budget</p></div>
+                <div class="step"><div class="step-number">3</div><h3>Earn Points</h3><p>Watch matches and earn points</p></div>
+                <div class="step"><div class="step-number">4</div><h3>Compete</h3><p>Climb the leaderboard</p></div>
             </div>
         </div>
     </div>
 
-    <!-- Roles Section -->
     <div id="roles" class="roles">
         <div class="container">
             <h2 class="section-title">Choose Your Role</h2>
             <p class="section-subtitle">Three ways to experience Pitch Premier</p>
             <div class="roles-grid">
-                <div class="role-card admin"><div class="role-icon">👑</div><h3>Admin</h3><p>Manage users, update match scores, add news, and control player stats</p><a href="#download" class="btn btn-outline" style="margin-top: 20px;" onclick="showLoginAlert()">Learn More →</a></div>
-                <div class="role-card fantasy"><div class="role-icon">🏆</div><h3>Fantasy Manager</h3><p>Build your dream team, manage transfers, and compete for top spot</p><a href="#download" class="btn btn-outline" style="margin-top: 20px;" onclick="showLoginAlert()">Learn More →</a></div>
-                <div class="role-card fan"><div class="role-icon">⚽</div><h3>Fan</h3><p>Follow live matches, read news, watch highlights, and stay updated</p><a href="#download" class="btn btn-outline" style="margin-top: 20px;" onclick="showLoginAlert()">Learn More →</a></div>
+                <div class="role-card admin"><div class="role-icon">👑</div><h3>Admin</h3><p>Manage users, update scores, add news</p><a href="#" class="btn btn-outline" style="margin-top:20px" onclick="openApp()">Learn More →</a></div>
+                <div class="role-card fantasy"><div class="role-icon">🏆</div><h3>Fantasy Manager</h3><p>Build team, manage transfers, compete</p><a href="#" class="btn btn-outline" style="margin-top:20px" onclick="openApp()">Learn More →</a></div>
+                <div class="role-card fan"><div class="role-icon">⚽</div><h3>Fan</h3><p>Follow live matches, read news</p><a href="#" class="btn btn-outline" style="margin-top:20px" onclick="openApp()">Learn More →</a></div>
             </div>
         </div>
     </div>
 
-    <!-- Pricing Section -->
     <div id="pricing" class="pricing">
         <div class="container">
             <h2 class="section-title">Simple, Transparent Pricing</h2>
             <p class="section-subtitle">Choose the plan that fits your needs</p>
             <div class="pricing-grid">
-                <div class="pricing-card"><h3>Free</h3><div class="price">₦0</div><ul><li>✅ Basic Fantasy Team</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li><li>✅ Match Highlights</li></ul><a href="#download" class="btn btn-outline" onclick="showLoginAlert()">Get Started</a></div>
-                <div class="pricing-card featured"><h3>Pro</h3><div class="price">₦3,000<small>/mo</small></div><ul><li>✅ Unlimited Fantasy Teams</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li><li>✅ Match Highlights</li><li>✅ Advanced Analytics</li><li>✅ Priority Support</li></ul><a href="#download" class="btn" onclick="showLoginAlert()">Start Free Trial</a></div>
-                <div class="pricing-card"><h3>Enterprise</h3><div class="price">Custom</div><ul><li>✅ Everything in Pro</li><li>✅ Custom Leagues</li><li>✅ API Access</li><li>✅ Dedicated Support</li></ul><a href="#download" class="btn btn-outline" onclick="showLoginAlert()">Contact Sales</a></div>
+                <div class="pricing-card"><h3>Free</h3><div class="price">₦0</div><ul><li>✅ Basic Fantasy Team</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li></ul><a href="#" class="btn btn-outline" onclick="openApp()">Get Started</a></div>
+                <div class="pricing-card featured"><h3>Pro</h3><div class="price">₦3,000<small>/mo</small></div><ul><li>✅ Unlimited Fantasy Teams</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li><li>✅ Advanced Analytics</li></ul><a href="#" class="btn" onclick="openApp()">Start Free Trial</a></div>
+                <div class="pricing-card"><h3>Enterprise</h3><div class="price">Custom</div><ul><li>✅ Everything in Pro</li><li>✅ API Access</li><li>✅ Dedicated Support</li></ul><a href="#" class="btn btn-outline" onclick="openApp()">Contact Sales</a></div>
             </div>
         </div>
     </div>
 
-    <!-- CTA Section -->
     <div class="cta">
         <div class="container">
             <h2>Ready to dominate your league?</h2>
             <p>Join thousands of fantasy football managers modernizing their experience with Pitch Premier.</p>
-            <a href="#download" class="btn" onclick="showLoginAlert()">Create Free Account →</a>
+            <a href="#" class="btn" onclick="openApp()">Create Free Account →</a>
         </div>
     </div>
 
-    <!-- Download Section -->
     <div id="download" class="download-section">
         <div class="container">
             <h2 class="section-title">Download Pitch Premier</h2>
@@ -577,75 +155,33 @@
             <div class="apk-card">
                 <div class="feature-icon">📱</div>
                 <h3>Android APK</h3>
-                <p style="margin: 20px 0;">Version 1.0.0 | ~50MB</p>
-                <a href="#" class="btn" id="downloadApkBtn">⬇️ Download APK</a>
-                <p style="margin-top: 20px; color: #888;">Coming soon to iOS App Store</p>
+                <p style="margin:20px 0">Version 1.0.0 | ~50MB</p>
+                <a href="/pitch-premier.apk" class="btn" download>⬇️ Download APK</a>
+                <p style="margin-top:20px; color:#888">Coming soon to iOS App Store</p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column"><h4>Pitch Premier</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#download">Download</a></div>
-                <div class="footer-column"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact Us</a><a href="#">Status</a></div>
-                <div class="footer-column"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div>
-                <div class="footer-column"><h4>Connect</h4><a href="#">Twitter</a><a href="#">Instagram</a><a href="#">Discord</a></div>
+                <div class="footer-column"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact Us</a></div>
+                <div class="footer-column"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+                <div class="footer-column"><h4>Connect</h4><a href="#">Twitter</a><a href="#">Instagram</a></div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2025 Pitch Premier. All rights reserved.</p><p style="margin-top: 10px;">Built with Flutter & Supabase</p></div>
+            <div class="footer-bottom"><p>&copy; 2025 Pitch Premier. All rights reserved.</p><p>Built with Flutter & Supabase</p></div>
         </div>
     </div>
 
     <script>
-        // Scroll animation observer
-        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all elements with animation classes
-        document.querySelectorAll('.feature-card, .step, .role-card, .pricing-card').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Function to show login alert (links to your Flutter app)
-        function showLoginAlert() {
-            alert('📱 Please download the app from the Download section above to sign in and start playing!');
+        function openApp() {
+            window.location.href = 'pitchpremier://login';
+            setTimeout(function() {
+                alert('📱 Please download the app first from the Download section above to start playing!');
+                document.getElementById('download').scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
         }
-
-        // Download APK functionality
-        document.getElementById('downloadApkBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('📱 APK download will be available soon. For now, contact the developer to get the app.');
-            // When you have the APK ready, replace the line above with:
-            // window.location.href = '/path/to/app-release.apk';
-        });
-
-        // Smooth scroll for all anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Add visible class to hero elements immediately
-        window.addEventListener('load', () => {
-            document.querySelectorAll('.hero h1, .hero p, .hero-buttons').forEach(el => {
-                el.style.opacity = '1';
-            });
-        });
     </script>
 </body>
 </html>
