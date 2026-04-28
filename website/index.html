@@ -71,16 +71,18 @@
             display: flex;
             gap: 30px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav a {
             color: white;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .nav a:hover {
             color: #14FFEC;
+            transform: translateY(-2px);
         }
 
         .nav .sign-in {
@@ -93,6 +95,7 @@
         .nav .sign-in:hover {
             background: #14FFEC;
             color: #1a1a1a;
+            transform: translateY(-2px);
         }
 
         .nav .get-started {
@@ -104,7 +107,7 @@
         }
 
         .nav .get-started:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
             background: #0D7377;
             color: white;
         }
@@ -144,14 +147,16 @@
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            transition: transform 0.3s, background 0.3s;
+            transition: all 0.3s ease;
             margin: 10px;
+            cursor: pointer;
         }
 
         .btn:hover {
             transform: translateY(-3px);
             background: #0D7377;
             color: white;
+            box-shadow: 0 10px 20px rgba(20, 255, 236, 0.2);
         }
 
         .btn-outline {
@@ -195,7 +200,14 @@
             padding: 40px 30px;
             border-radius: 20px;
             text-align: center;
-            transition: transform 0.3s, background 0.3s;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .feature-card:hover {
@@ -228,6 +240,14 @@
 
         .step {
             text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+
+        .step.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .step-number {
@@ -242,6 +262,11 @@
             font-size: 24px;
             font-weight: bold;
             margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1);
         }
 
         /* Role Cards */
@@ -262,7 +287,14 @@
             padding: 40px 30px;
             border-radius: 20px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .role-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .role-card:hover {
@@ -296,7 +328,14 @@
             padding: 40px 30px;
             border-radius: 20px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .pricing-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .pricing-card:hover {
@@ -328,10 +367,6 @@
             color: #ccc;
         }
 
-        .pricing-card .btn {
-            margin-top: 20px;
-        }
-
         /* CTA Section */
         .cta {
             padding: 100px 0;
@@ -342,23 +377,42 @@
         .cta h2 {
             font-size: 42px;
             margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease;
         }
 
         .cta p {
             font-size: 18px;
             margin-bottom: 30px;
             color: #1a1a1a;
+            animation: fadeInUp 0.6s ease 0.2s both;
         }
 
         .cta .btn {
             background: #1a1a1a;
             color: #14FFEC;
             border: none;
+            animation: fadeInUp 0.6s ease 0.4s both;
         }
 
         .cta .btn:hover {
             background: white;
             color: #1a1a1a;
+            transform: translateY(-3px);
+        }
+
+        /* Download Section */
+        .download-section {
+            padding: 100px 0;
+            background: #0f0f0f;
+            text-align: center;
+        }
+
+        .apk-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         /* Footer */
@@ -385,11 +439,12 @@
             color: #888;
             text-decoration: none;
             margin-bottom: 10px;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .footer-column a:hover {
             color: #14FFEC;
+            transform: translateX(5px);
         }
 
         .footer-bottom {
@@ -416,7 +471,8 @@
             .hero h1 { font-size: 36px; }
             .section-title { font-size: 32px; }
             .header { flex-direction: column; }
-            .nav { flex-wrap: wrap; justify-content: center; }
+            .nav { justify-content: center; }
+            .btn { padding: 12px 25px; }
         }
     </style>
 </head>
@@ -430,8 +486,8 @@
                 <a href="#how-it-works">How It Works</a>
                 <a href="#roles">Roles</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#download" class="sign-in">Sign In</a>
-                <a href="#download" class="get-started">Get Started</a>
+                <a href="#download" class="sign-in" onclick="showLoginAlert()">Sign In</a>
+                <a href="#download" class="get-started" onclick="showLoginAlert()">Get Started</a>
             </div>
         </div>
     </div>
@@ -442,7 +498,7 @@
             <h1>The #1 Fantasy Football App<br>For Nigerian Fans</h1>
             <p>Build your dream team, compete with friends, and experience live matches like never before.</p>
             <div class="hero-buttons">
-                <a href="#download" class="btn">Start for Free →</a>
+                <a href="#download" class="btn" onclick="showLoginAlert()">Start for Free →</a>
                 <a href="#features" class="btn btn-outline">Learn More</a>
             </div>
         </div>
@@ -454,36 +510,12 @@
             <h2 class="section-title">Everything you need to dominate</h2>
             <p class="section-subtitle">We've built all the essential tools into one cohesive platform</p>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Live Match Updates</h3>
-                    <p>Real-time scores with goal notifications. Never miss a moment of the action.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Build Your Team</h3>
-                    <p>Start with £100m budget and build your ultimate fantasy squad.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Track Performance</h3>
-                    <p>Monitor player points and climb the leaderboard.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📰</div>
-                    <h3>Latest News</h3>
-                    <p>Transfer news, injuries, and match previews in real-time.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔴</div>
-                    <h3>Live Scores</h3>
-                    <p>Watch scores update in real-time during matches.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎬</div>
-                    <h3>Match Highlights</h3>
-                    <p>Watch YouTube highlights directly from the app.</p>
-                </div>
+                <div class="feature-card"><div class="feature-icon">⚡</div><h3>Live Match Updates</h3><p>Real-time scores with goal notifications</p></div>
+                <div class="feature-card"><div class="feature-icon">🏆</div><h3>Build Your Team</h3><p>Start with £100m budget</p></div>
+                <div class="feature-card"><div class="feature-icon">📊</div><h3>Track Performance</h3><p>Monitor player points and climb leaderboard</p></div>
+                <div class="feature-card"><div class="feature-icon">📰</div><h3>Latest News</h3><p>Transfer news, injuries, match previews</p></div>
+                <div class="feature-card"><div class="feature-icon">🔴</div><h3>Live Scores</h3><p>Watch scores update in real-time</p></div>
+                <div class="feature-card"><div class="feature-icon">🎬</div><h3>Match Highlights</h3><p>Watch YouTube highlights directly</p></div>
             </div>
         </div>
     </div>
@@ -494,26 +526,10 @@
             <h2 class="section-title">How It Works</h2>
             <p class="section-subtitle">Get started in three simple steps</p>
             <div class="steps-grid">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Sign Up</h3>
-                    <p>Create your free account and choose your role</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Build Team</h3>
-                    <p>Pick your players within the £100m budget</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Earn Points</h3>
-                    <p>Watch matches and earn points based on real performance</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Compete</h3>
-                    <p>Climb the leaderboard and challenge your friends</p>
-                </div>
+                <div class="step"><div class="step-number">1</div><h3>Sign Up</h3><p>Create your free account and choose your role</p></div>
+                <div class="step"><div class="step-number">2</div><h3>Build Team</h3><p>Pick your players within the £100m budget</p></div>
+                <div class="step"><div class="step-number">3</div><h3>Earn Points</h3><p>Watch matches and earn points based on real performance</p></div>
+                <div class="step"><div class="step-number">4</div><h3>Compete</h3><p>Climb the leaderboard and challenge your friends</p></div>
             </div>
         </div>
     </div>
@@ -524,24 +540,9 @@
             <h2 class="section-title">Choose Your Role</h2>
             <p class="section-subtitle">Three ways to experience Pitch Premier</p>
             <div class="roles-grid">
-                <div class="role-card admin">
-                    <div class="role-icon">👑</div>
-                    <h3>Admin</h3>
-                    <p>Manage users, update match scores, add news, and control player stats. Full platform control.</p>
-                    <a href="#download" class="btn btn-outline" style="margin-top: 20px;">Learn More →</a>
-                </div>
-                <div class="role-card fantasy">
-                    <div class="role-icon">🏆</div>
-                    <h3>Fantasy Manager</h3>
-                    <p>Build your dream team, manage transfers, and compete for top spot on the leaderboard.</p>
-                    <a href="#download" class="btn btn-outline" style="margin-top: 20px;">Learn More →</a>
-                </div>
-                <div class="role-card fan">
-                    <div class="role-icon">⚽</div>
-                    <h3>Fan</h3>
-                    <p>Follow live matches, read news, watch highlights, and stay updated with your favorite teams.</p>
-                    <a href="#download" class="btn btn-outline" style="margin-top: 20px;">Learn More →</a>
-                </div>
+                <div class="role-card admin"><div class="role-icon">👑</div><h3>Admin</h3><p>Manage users, update match scores, add news, and control player stats</p><a href="#download" class="btn btn-outline" style="margin-top: 20px;" onclick="showLoginAlert()">Learn More →</a></div>
+                <div class="role-card fantasy"><div class="role-icon">🏆</div><h3>Fantasy Manager</h3><p>Build your dream team, manage transfers, and compete for top spot</p><a href="#download" class="btn btn-outline" style="margin-top: 20px;" onclick="showLoginAlert()">Learn More →</a></div>
+                <div class="role-card fan"><div class="role-icon">⚽</div><h3>Fan</h3><p>Follow live matches, read news, watch highlights, and stay updated</p><a href="#download" class="btn btn-outline" style="margin-top: 20px;" onclick="showLoginAlert()">Learn More →</a></div>
             </div>
         </div>
     </div>
@@ -552,44 +553,9 @@
             <h2 class="section-title">Simple, Transparent Pricing</h2>
             <p class="section-subtitle">Choose the plan that fits your needs</p>
             <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Free</h3>
-                    <div class="price">₦0</div>
-                    <ul>
-                        <li>✅ Basic Fantasy Team</li>
-                        <li>✅ Live Match Scores</li>
-                        <li>✅ News & Updates</li>
-                        <li>✅ Match Highlights</li>
-                        <li>❌ Advanced Analytics</li>
-                        <li>❌ Priority Support</li>
-                    </ul>
-                    <a href="#download" class="btn btn-outline">Get Started</a>
-                </div>
-                <div class="pricing-card featured">
-                    <h3>Pro</h3>
-                    <div class="price">₦3,000<small>/mo</small></div>
-                    <ul>
-                        <li>✅ Unlimited Fantasy Teams</li>
-                        <li>✅ Live Match Scores</li>
-                        <li>✅ News & Updates</li>
-                        <li>✅ Match Highlights</li>
-                        <li>✅ Advanced Analytics</li>
-                        <li>✅ Priority Support</li>
-                    </ul>
-                    <a href="#download" class="btn">Start Free Trial</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="price">Custom</div>
-                    <ul>
-                        <li>✅ Everything in Pro</li>
-                        <li>✅ Custom Leagues</li>
-                        <li>✅ API Access</li>
-                        <li>✅ Dedicated Support</li>
-                        <li>✅ White Label Option</li>
-                    </ul>
-                    <a href="#download" class="btn btn-outline">Contact Sales</a>
-                </div>
+                <div class="pricing-card"><h3>Free</h3><div class="price">₦0</div><ul><li>✅ Basic Fantasy Team</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li><li>✅ Match Highlights</li></ul><a href="#download" class="btn btn-outline" onclick="showLoginAlert()">Get Started</a></div>
+                <div class="pricing-card featured"><h3>Pro</h3><div class="price">₦3,000<small>/mo</small></div><ul><li>✅ Unlimited Fantasy Teams</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li><li>✅ Match Highlights</li><li>✅ Advanced Analytics</li><li>✅ Priority Support</li></ul><a href="#download" class="btn" onclick="showLoginAlert()">Start Free Trial</a></div>
+                <div class="pricing-card"><h3>Enterprise</h3><div class="price">Custom</div><ul><li>✅ Everything in Pro</li><li>✅ Custom Leagues</li><li>✅ API Access</li><li>✅ Dedicated Support</li></ul><a href="#download" class="btn btn-outline" onclick="showLoginAlert()">Contact Sales</a></div>
             </div>
         </div>
     </div>
@@ -599,19 +565,21 @@
         <div class="container">
             <h2>Ready to dominate your league?</h2>
             <p>Join thousands of fantasy football managers modernizing their experience with Pitch Premier.</p>
-            <a href="#download" class="btn">Create Free Account →</a>
+            <a href="#download" class="btn" onclick="showLoginAlert()">Create Free Account →</a>
         </div>
     </div>
 
     <!-- Download Section -->
-    <div id="download" class="features">
+    <div id="download" class="download-section">
         <div class="container">
             <h2 class="section-title">Download Pitch Premier</h2>
             <p class="section-subtitle">Get the app on your Android device</p>
-            <div style="text-align: center;">
-                <a href="#" class="btn" style="font-size: 18px;">⬇️ Download APK (v1.0.0)</a>
-                <p style="margin-top: 20px; color: #888;">📱 Android 5.0+ required | ~50MB</p>
-                <p style="margin-top: 10px; color: #888;">Coming soon to iOS App Store</p>
+            <div class="apk-card">
+                <div class="feature-icon">📱</div>
+                <h3>Android APK</h3>
+                <p style="margin: 20px 0;">Version 1.0.0 | ~50MB</p>
+                <a href="#" class="btn" id="downloadApkBtn">⬇️ Download APK</a>
+                <p style="margin-top: 20px; color: #888;">Coming soon to iOS App Store</p>
             </div>
         </div>
     </div>
@@ -620,47 +588,62 @@
     <div class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-column">
-                    <h4>Pitch Premier</h4>
-                    <a href="#features">Features</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#download">Download</a>
-                </div>
-                <div class="footer-column">
-                    <h4>Support</h4>
-                    <a href="#">Help Center</a>
-                    <a href="#">Contact Us</a>
-                    <a href="#">Status</a>
-                </div>
-                <div class="footer-column">
-                    <h4>Legal</h4>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
-                </div>
-                <div class="footer-column">
-                    <h4>Connect</h4>
-                    <a href="#">Twitter</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Discord</a>
-                </div>
+                <div class="footer-column"><h4>Pitch Premier</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#download">Download</a></div>
+                <div class="footer-column"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact Us</a><a href="#">Status</a></div>
+                <div class="footer-column"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div>
+                <div class="footer-column"><h4>Connect</h4><a href="#">Twitter</a><a href="#">Instagram</a><a href="#">Discord</a></div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Pitch Premier. All rights reserved.</p>
-                <p style="margin-top: 10px;">Built with Flutter & Supabase</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Pitch Premier. All rights reserved.</p><p style="margin-top: 10px;">Built with Flutter & Supabase</p></div>
         </div>
     </div>
 
     <script>
-        // Smooth scrolling for anchor links
+        // Scroll animation observer
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animation classes
+        document.querySelectorAll('.feature-card, .step, .role-card, .pricing-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Function to show login alert (links to your Flutter app)
+        function showLoginAlert() {
+            alert('📱 Please download the app from the Download section above to sign in and start playing!');
+        }
+
+        // Download APK functionality
+        document.getElementById('downloadApkBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('📱 APK download will be available soon. For now, contact the developer to get the app.');
+            // When you have the APK ready, replace the line above with:
+            // window.location.href = '/path/to/app-release.apk';
+        });
+
+        // Smooth scroll for all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
+            });
+        });
+
+        // Add visible class to hero elements immediately
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.hero h1, .hero p, .hero-buttons').forEach(el => {
+                el.style.opacity = '1';
             });
         });
     </script>
