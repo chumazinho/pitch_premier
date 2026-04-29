@@ -21,10 +21,6 @@ void main() async {
   // Listen for future deep links
   appLinks.uriLinkStream.listen((Uri uri) {
     print('Deep link received: $uri');
-    // Navigate based on the link
-    if (uri.toString().contains('login')) {
-      // Already on login screen by default
-    }
   });
 
   runApp(const PitchPremierApp());
