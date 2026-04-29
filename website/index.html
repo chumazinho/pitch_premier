@@ -1,7 +1,4 @@
-﻿cd C:\Users\ChukwumaUgobueze\pitch_premier\website
-
-@"
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -126,8 +123,8 @@
                 <a href="#how-it-works">How It Works</a>
                 <a href="#roles">Roles</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#download" class="sign-in">Sign In</a>
-                <a href="#download" class="get-started">Get Started</a>
+                <a href="#" class="sign-in" onclick="openApp()">Sign In</a>
+                <a href="#" class="get-started" onclick="openApp()">Get Started</a>
             </div>
         </div>
     </div>
@@ -137,7 +134,7 @@
             <h1>The #1 Fantasy Football App<br>For Nigerian Fans</h1>
             <p>Build your dream team, compete with friends, and experience live matches like never before.</p>
             <div class="hero-buttons">
-                <a href="#download" class="btn">Get Started →</a>
+                <a href="#" class="btn" onclick="openApp()">Get Started →</a>
                 <a href="#features" class="btn btn-outline">Learn More</a>
             </div>
         </div>
@@ -176,9 +173,9 @@
             <h2 class="section-title">Choose Your Role</h2>
             <p class="section-subtitle">Three ways to experience Pitch Premier</p>
             <div class="roles-grid">
-                <div class="role-card admin"><div class="role-icon">👑</div><h3>Admin</h3><p>Manage users, update scores, add news</p><a href="#download" class="btn btn-outline" style="margin-top:20px">Learn More →</a></div>
-                <div class="role-card fantasy"><div class="role-icon">🏆</div><h3>Fantasy Manager</h3><p>Build team, manage transfers, compete</p><a href="#download" class="btn btn-outline" style="margin-top:20px">Learn More →</a></div>
-                <div class="role-card fan"><div class="role-icon">⚽</div><h3>Fan</h3><p>Follow live matches, read news</p><a href="#download" class="btn btn-outline" style="margin-top:20px">Learn More →</a></div>
+                <div class="role-card admin"><div class="role-icon">👑</div><h3>Admin</h3><p>Manage users, update scores, add news</p><a href="#" class="btn btn-outline" style="margin-top:20px" onclick="openApp()">Learn More →</a></div>
+                <div class="role-card fantasy"><div class="role-icon">🏆</div><h3>Fantasy Manager</h3><p>Build team, manage transfers, compete</p><a href="#" class="btn btn-outline" style="margin-top:20px" onclick="openApp()">Learn More →</a></div>
+                <div class="role-card fan"><div class="role-icon">⚽</div><h3>Fan</h3><p>Follow live matches, read news</p><a href="#" class="btn btn-outline" style="margin-top:20px" onclick="openApp()">Learn More →</a></div>
             </div>
         </div>
     </div>
@@ -188,7 +185,7 @@
             <h2 class="section-title">Simple, Transparent Pricing</h2>
             <p class="section-subtitle">Choose the plan that fits your needs</p>
             <div class="pricing-grid">
-                <div class="pricing-card" onclick="showPricingModal('Free')"><h3>Free</h3><div class="price">₦0</div><ul><li>✅ Basic Fantasy Team</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li></ul><a href="#download" class="btn btn-outline" onclick="event.stopPropagation()">Get Started</a></div>
+                <div class="pricing-card" onclick="showPricingModal('Free')"><h3>Free</h3><div class="price">₦0</div><ul><li>✅ Basic Fantasy Team</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li></ul><a href="#" class="btn btn-outline" onclick="event.stopPropagation(); openApp()">Get Started</a></div>
                 <div class="pricing-card featured" onclick="showPricingModal('Pro')"><h3>Pro</h3><div class="price">₦3,000<small>/mo</small></div><ul><li>✅ Unlimited Fantasy Teams</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li><li>✅ Advanced Analytics</li></ul><a href="#" class="btn" onclick="event.stopPropagation(); showPricingModal('Pro')">Start Free Trial</a></div>
                 <div class="pricing-card" onclick="showPricingModal('Enterprise')"><h3>Enterprise</h3><div class="price">Custom</div><ul><li>✅ Everything in Pro</li><li>✅ API Access</li><li>✅ Dedicated Support</li></ul><a href="#" class="btn btn-outline" onclick="event.stopPropagation(); showPricingModal('Enterprise')">Contact Sales</a></div>
             </div>
@@ -213,7 +210,7 @@
         <div class="container">
             <h2>Ready to dominate your league?</h2>
             <p>Join thousands of fantasy football managers modernizing their experience with Pitch Premier.</p>
-            <a href="#download" class="btn">Create Free Account →</a>
+            <a href="#" class="btn" onclick="openApp()">Create Free Account →</a>
         </div>
     </div>
 
@@ -247,6 +244,11 @@
     </div>
 
     <script>
+        // Open the Flutter app directly
+        function openApp() {
+            window.location.href = 'pitchpremier://login';
+        }
+        
         function showPricingModal(plan) {
             document.getElementById('planName').innerText = plan;
             document.getElementById('modalTitle').innerText = plan === 'Free' ? 'Free Plan' : 'Upgrade Your Plan';
@@ -278,4 +280,3 @@
     </script>
 </body>
 </html>
-"@ | Out-File -FilePath index.html -Encoding utf8
