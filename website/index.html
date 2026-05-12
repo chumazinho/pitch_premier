@@ -6,7 +6,14 @@
     <title>Pitch Premier - Fantasy Football App</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0a0a0a; color: white; line-height: 1.6; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0a0a0a; color: white; line-height: 1.6; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
         .header { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: sticky; top: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(20,255,236,0.2); }
@@ -18,21 +25,72 @@
         .nav .get-started { background: #14FFEC; color: #1a1a1a; padding: 8px 20px; border-radius: 25px; font-weight: bold; }
         
         .hero { padding: 100px 0; text-align: center; background: linear-gradient(135deg,#0a0a0a 0%,#0D7377 100%); }
-        .hero h1 { font-size: 56px; margin-bottom: 20px; }
-        .hero p { font-size: 20px; color: #ccc; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero h1 { font-size: 56px; margin-bottom: 20px; animation: fadeInUp 0.8s ease; }
+        .hero p { font-size: 20px; color: #ccc; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; animation: fadeInUp 0.8s ease 0.2s both; }
+        .hero-buttons { animation: fadeInUp 0.8s ease 0.4s both; }
         
         .btn { display: inline-block; padding: 15px 40px; background: #14FFEC; color: #1a1a1a; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease; margin: 10px; cursor: pointer; border: none; }
         .btn:hover { transform: translateY(-3px); background: #0D7377; color: white; }
         .btn-outline { background: transparent; border: 2px solid #14FFEC; color: #14FFEC; }
+        .btn-outline:hover { background: #14FFEC; color: #1a1a1a; }
         
-        .download-section { padding: 80px 0; background: #0f0f0f; text-align: center; }
-        .apk-card { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; max-width: 500px; margin: 0 auto; }
+        .features { padding: 100px 0; background: #0f0f0f; }
+        .section-title { text-align: center; font-size: 42px; margin-bottom: 20px; }
+        .section-subtitle { text-align: center; color: #888; margin-bottom: 60px; font-size: 18px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; }
+        .feature-card:hover { transform: translateY(-10px); background: rgba(20,255,236,0.1); }
         .feature-icon { font-size: 50px; margin-bottom: 20px; }
+        .feature-card h3 { font-size: 24px; margin-bottom: 15px; }
         
-        .footer { padding: 60px 0 40px; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #888; }
+        .how-it-works { padding: 100px 0; background: linear-gradient(135deg,#0D7377,#0a0a0a); }
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 50px; }
+        .step { text-align: center; }
+        .step-number { width: 60px; height: 60px; background: #14FFEC; color: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 20px; transition: all 0.3s ease; }
+        .step:hover .step-number { transform: scale(1.1); }
+        
+        .roles { padding: 100px 0; background: #0f0f0f; }
+        .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .role-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; }
+        .role-card:hover { transform: translateY(-10px); }
+        .role-card.admin { border-top: 4px solid #FF6B6B; }
+        .role-card.fantasy { border-top: 4px solid #14FFEC; }
+        .role-card.fan { border-top: 4px solid #0D7377; }
+        .role-icon { font-size: 48px; margin-bottom: 20px; }
+        
+        .pricing { padding: 100px 0; background: #0a0a0a; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .pricing-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; cursor: pointer; }
+        .pricing-card:hover { transform: translateY(-10px); background: rgba(20,255,236,0.1); }
+        .pricing-card.featured { background: linear-gradient(135deg,rgba(20,255,236,0.1),rgba(13,115,119,0.1)); border: 1px solid #14FFEC; }
+        .price { font-size: 48px; font-weight: bold; margin: 20px 0; }
+        .price small { font-size: 16px; }
+        .pricing-card ul { list-style: none; margin: 30px 0; }
+        .pricing-card li { padding: 8px 0; color: #ccc; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: #1a1a1a; max-width: 400px; width: 90%; padding: 30px; border-radius: 20px; text-align: center; border: 1px solid #14FFEC; }
+        .modal-content .bank-details { background: #0a0a0a; padding: 15px; border-radius: 12px; margin: 20px 0; text-align: left; }
+        .close-modal { background: #14FFEC; color: #1a1a1a; border: none; padding: 10px 30px; border-radius: 25px; cursor: pointer; margin-top: 15px; }
+        
+        .cta { padding: 100px 0; text-align: center; background: linear-gradient(135deg,#0D7377,#14FFEC); }
+        .cta h2 { font-size: 42px; margin-bottom: 20px; }
+        .cta p { font-size: 18px; margin-bottom: 30px; color: #1a1a1a; }
+        .cta .btn { background: #1a1a1a; color: #14FFEC; }
+        
+        .download-section { padding: 100px 0; background: #0f0f0f; text-align: center; }
+        .apk-card { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; max-width: 500px; margin: 0 auto; }
+        
+        .footer { padding: 60px 0 40px; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-column h4 { margin-bottom: 20px; color: #14FFEC; }
+        .footer-column a { display: block; color: #888; text-decoration: none; margin-bottom: 10px; cursor: pointer; }
+        .footer-column a:hover { color: #14FFEC; }
+        .footer-bottom { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); color: #888; }
         
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
+            .section-title { font-size: 32px; }
             .header { flex-direction: column; }
             .nav { justify-content: center; }
         }
@@ -43,9 +101,12 @@
         <div class="header">
             <div class="logo">⚽ PITCH PREMIER</div>
             <div class="nav">
-                <a href="#download">Download</a>
-                <a href="#" class="sign-in" onclick="downloadApp()">Sign In</a>
-                <a href="#" class="get-started" onclick="downloadApp()">Get Started</a>
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#roles">Roles</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#" class="sign-in" onclick="scrollToDownload()">Sign In</a>
+                <a href="#" class="get-started" onclick="scrollToDownload()">Get Started</a>
             </div>
         </div>
     </div>
@@ -54,17 +115,91 @@
         <div class="container">
             <h1>The #1 Fantasy Football App<br>For Nigerian Fans</h1>
             <p>Build your dream team, compete with friends, and experience live matches like never before.</p>
-            <div>
-                <a href="#" class="btn" onclick="downloadApp()">Get Started →</a>
-                <a href="#download" class="btn btn-outline">Learn More</a>
+            <div class="hero-buttons">
+                <a href="#" class="btn" onclick="scrollToDownload()">Get Started →</a>
+                <a href="#features" class="btn btn-outline">Learn More</a>
             </div>
+        </div>
+    </div>
+
+    <div id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Everything you need to dominate</h2>
+            <p class="section-subtitle">We've built all the essential tools into one cohesive platform</p>
+            <div class="features-grid">
+                <div class="feature-card"><div class="feature-icon">⚡</div><h3>Live Match Updates</h3><p>Real-time scores with goal notifications</p></div>
+                <div class="feature-card"><div class="feature-icon">🏆</div><h3>Build Your Team</h3><p>Start with £100m budget</p></div>
+                <div class="feature-card"><div class="feature-icon">📊</div><h3>Track Performance</h3><p>Monitor player points and climb leaderboard</p></div>
+                <div class="feature-card"><div class="feature-icon">📰</div><h3>Latest News</h3><p>Transfer news, injuries, match previews</p></div>
+                <div class="feature-card"><div class="feature-icon">🔴</div><h3>Live Scores</h3><p>Watch scores update in real-time</p></div>
+                <div class="feature-card"><div class="feature-icon">🎬</div><h3>Match Highlights</h3><p>Watch YouTube highlights directly</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Get started in simple steps</p>
+            <div class="steps-grid">
+                <div class="step"><div class="step-number">1</div><h3>Download App</h3><p>Get the app on your Android device</p></div>
+                <div class="step"><div class="step-number">2</div><h3>Create Account</h3><p>Sign up and choose your role</p></div>
+                <div class="step"><div class="step-number">3</div><h3>Build Team</h3><p>Pick players with £100m budget</p></div>
+                <div class="step"><div class="step-number">4</div><h3>Compete</h3><p>Climb the leaderboard</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="roles" class="roles">
+        <div class="container">
+            <h2 class="section-title">Choose Your Role</h2>
+            <p class="section-subtitle">Three ways to experience Pitch Premier</p>
+            <div class="roles-grid">
+                <div class="role-card admin"><div class="role-icon">👑</div><h3>Admin</h3><p>Manage users, update scores, add news</p><a href="#" class="btn btn-outline" style="margin-top:20px" onclick="scrollToDownload()">Learn More →</a></div>
+                <div class="role-card fantasy"><div class="role-icon">🏆</div><h3>Fantasy Manager</h3><p>Build team, manage transfers, compete</p><a href="#" class="btn btn-outline" style="margin-top:20px" onclick="scrollToDownload()">Learn More →</a></div>
+                <div class="role-card fan"><div class="role-icon">⚽</div><h3>Fan</h3><p>Follow live matches, read news</p><a href="#" class="btn btn-outline" style="margin-top:20px" onclick="scrollToDownload()">Learn More →</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <p class="section-subtitle">Choose the plan that fits your needs</p>
+            <div class="pricing-grid">
+                <div class="pricing-card" onclick="showPricingModal('Free')"><h3>Free</h3><div class="price">₦0</div><ul><li>✅ Basic Fantasy Team</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li></ul><a href="#" class="btn btn-outline" onclick="event.stopPropagation(); scrollToDownload()">Get Started</a></div>
+                <div class="pricing-card featured" onclick="showPricingModal('Pro')"><h3>Pro</h3><div class="price">₦3,000<small>/mo</small></div><ul><li>✅ Unlimited Fantasy Teams</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li><li>✅ Advanced Analytics</li></ul><a href="#" class="btn" onclick="event.stopPropagation(); showPricingModal('Pro')">Start Free Trial</a></div>
+                <div class="pricing-card" onclick="showPricingModal('Enterprise')"><h3>Enterprise</h3><div class="price">Custom</div><ul><li>✅ Everything in Pro</li><li>✅ API Access</li><li>✅ Dedicated Support</li></ul><a href="#" class="btn btn-outline" onclick="event.stopPropagation(); showPricingModal('Enterprise')">Contact Sales</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="pricingModal" class="modal">
+        <div class="modal-content">
+            <h3>Upgrade Your Plan</h3>
+            <p>To activate the plan, please make a bank transfer to the account below.</p>
+            <div class="bank-details">
+                <p><strong>Bank Name:</strong> Opay</p>
+                <p><strong>Account Number:</strong> 29752917</p>
+                <p><strong>Account Name:</strong> Ugobueze Chukwuma</p>
+            </div>
+            <button class="close-modal" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <div class="cta">
+        <div class="container">
+            <h2>Ready to dominate your league?</h2>
+            <p>Join thousands of fantasy football managers modernizing their experience with Pitch Premier.</p>
+            <a href="#" class="btn" onclick="scrollToDownload()">Create Free Account →</a>
         </div>
     </div>
 
     <div id="download" class="download-section">
         <div class="container">
-            <h2>Download Pitch Premier</h2>
-            <p>Get the app on your Android device</p>
+            <h2 class="section-title">Download Pitch Premier</h2>
+            <p class="section-subtitle">Get the app on your Android device</p>
             <div class="apk-card">
                 <div class="feature-icon">📱</div>
                 <h3>Android App</h3>
@@ -77,14 +212,34 @@
 
     <div class="footer">
         <div class="container">
-            <p>&copy; 2025 Pitch Premier. All rights reserved.</p>
-            <p style="margin-top: 10px;">Built with Flutter & Supabase</p>
+            <div class="footer-grid">
+                <div class="footer-column"><h4>Pitch Premier</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#download">Download</a></div>
+                <div class="footer-column"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact Us</a></div>
+                <div class="footer-column"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+                <div class="footer-column"><h4>Connect</h4><a href="#">Twitter</a><a href="#">Instagram</a></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Pitch Premier. All rights reserved.</p><p>Built with Flutter & Supabase</p></div>
         </div>
     </div>
 
     <script>
-        function downloadApp() {
+        function scrollToDownload() {
             document.getElementById('download').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function showPricingModal(plan) {
+            document.getElementById('pricingModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('pricingModal').style.display = 'none';
+        }
+        
+        window.onclick = function(event) {
+            var modal = document.getElementById('pricingModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         }
     </script>
 </body>
