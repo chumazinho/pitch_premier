@@ -30,13 +30,21 @@
         .nav .get-started { background: #14FFEC; color: #1a1a1a; padding: 8px 20px; border-radius: 25px; font-weight: bold; }
         .nav .get-started:hover { background: #0D7377; color: white; }
         
-        .hero { padding: 80px 0; text-align: center; background: linear-gradient(135deg,#0a0a0a 0%,#0D7377 100%); }
-        .hero h1 { font-size: 56px; margin-bottom: 20px; animation: fadeInUp 0.8s ease; }
-        .hero p { font-size: 20px; color: #ccc; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; animation: fadeInUp 0.8s ease 0.2s both; }
-        .hero-buttons { animation: fadeInUp 0.8s ease 0.4s both; }
+        /* Hero Section with Side-by-Side */
+        .hero { padding: 80px 0; background: linear-gradient(135deg,#0a0a0a 0%,#0D7377 100%); }
+        .hero-grid { display: flex; align-items: center; justify-content: space-between; gap: 50px; flex-wrap: wrap; }
+        .hero-content { flex: 1; min-width: 280px; animation: slideInLeft 0.8s ease; }
+        .hero-content h1 { font-size: 56px; margin-bottom: 20px; line-height: 1.2; }
+        .hero-content p { font-size: 18px; color: #ccc; margin-bottom: 30px; }
+        .hero-image { flex: 1; min-width: 280px; text-align: center; }
+        .phone-mockup { background: #1a1a1a; border-radius: 40px; padding: 20px; max-width: 280px; margin: 0 auto; border: 1px solid #14FFEC; }
+        .phone-mockup .screen { background: linear-gradient(135deg,#0D7377,#0a0a0a); border-radius: 30px; padding: 20px; }
+        .qr-section { margin-top: 20px; text-align: center; }
+        .qr-code { background: white; width: 150px; height: 150px; margin: 0 auto; border-radius: 20px; display: flex; align-items: center; justify-content: center; }
+        .qr-code span { color: #0a0a0a; font-size: 12px; text-align: center; }
         
-        .btn { display: inline-block; padding: 15px 40px; background: #14FFEC; color: #1a1a1a; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease; margin: 10px; cursor: pointer; border: none; }
-        .btn:hover { transform: translateY(-3px); background: #0D7377; color: white; box-shadow: 0 10px 20px rgba(20,255,236,0.2); }
+        .btn { display: inline-block; padding: 15px 40px; background: #14FFEC; color: #1a1a1a; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease; margin: 10px 10px 10px 0; cursor: pointer; border: none; }
+        .btn:hover { transform: translateY(-3px); background: #0D7377; color: white; }
         .btn-outline { background: transparent; border: 2px solid #14FFEC; color: #14FFEC; }
         .btn-outline:hover { background: #14FFEC; color: #1a1a1a; }
         
@@ -44,22 +52,18 @@
         .section-title { text-align: center; font-size: 42px; margin-bottom: 20px; }
         .section-subtitle { text-align: center; color: #888; margin-bottom: 60px; font-size: 18px; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; opacity: 0; transform: translateY(30px); }
-        .feature-card.visible { opacity: 1; transform: translateY(0); transition: all 0.6s ease; }
+        .feature-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; }
         .feature-card:hover { transform: translateY(-10px); background: rgba(20,255,236,0.1); }
         .feature-icon { font-size: 50px; margin-bottom: 20px; }
         
         .how-it-works { padding: 100px 0; background: linear-gradient(135deg,#0D7377,#0a0a0a); }
         .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 50px; }
-        .step { text-align: center; opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
-        .step.visible { opacity: 1; transform: translateY(0); }
-        .step-number { width: 60px; height: 60px; background: #14FFEC; color: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 20px; transition: all 0.3s ease; }
-        .step:hover .step-number { transform: scale(1.1); }
+        .step { text-align: center; }
+        .step-number { width: 60px; height: 60px; background: #14FFEC; color: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 20px; }
         
         .roles { padding: 100px 0; background: #0f0f0f; }
         .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
-        .role-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; opacity: 0; transform: translateY(30px); }
-        .role-card.visible { opacity: 1; transform: translateY(0); }
+        .role-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; }
         .role-card:hover { transform: translateY(-10px); }
         .role-card.admin { border-top: 4px solid #FF6B6B; }
         .role-card.fantasy { border-top: 4px solid #14FFEC; }
@@ -68,8 +72,7 @@
         
         .pricing { padding: 100px 0; background: #0a0a0a; }
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .pricing-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; opacity: 0; transform: translateY(30px); cursor: pointer; }
-        .pricing-card.visible { opacity: 1; transform: translateY(0); }
+        .pricing-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; cursor: pointer; }
         .pricing-card:hover { transform: translateY(-10px); background: rgba(20,255,236,0.1); }
         .pricing-card.featured { background: linear-gradient(135deg,rgba(20,255,236,0.1),rgba(13,115,119,0.1)); border: 1px solid #14FFEC; }
         .price { font-size: 48px; font-weight: bold; margin: 20px 0; }
@@ -78,26 +81,20 @@
         .pricing-card li { padding: 8px 0; color: #ccc; }
         
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: #1a1a1a; max-width: 400px; width: 90%; padding: 30px; border-radius: 20px; text-align: center; border: 1px solid #14FFEC; animation: fadeInUp 0.3s ease; }
-        .modal-content h3 { color: #14FFEC; margin-bottom: 20px; }
+        .modal-content { background: #1a1a1a; max-width: 400px; width: 90%; padding: 30px; border-radius: 20px; text-align: center; border: 1px solid #14FFEC; }
         .modal-content .bank-details { background: #0a0a0a; padding: 15px; border-radius: 12px; margin: 20px 0; text-align: left; }
-        .modal-content .bank-details p { margin: 8px 0; }
         .close-modal { background: #14FFEC; color: #1a1a1a; border: none; padding: 10px 30px; border-radius: 25px; cursor: pointer; margin-top: 15px; }
         
         .cta { padding: 100px 0; text-align: center; background: linear-gradient(135deg,#0D7377,#14FFEC); }
-        .cta h2 { font-size: 42px; margin-bottom: 20px; animation: fadeInUp 0.6s ease; }
-        .cta p { font-size: 18px; margin-bottom: 30px; color: #1a1a1a; animation: fadeInUp 0.6s ease 0.2s both; }
-        .cta .btn { background: #1a1a1a; color: #14FFEC; animation: fadeInUp 0.6s ease 0.4s both; }
-        
-        .download-section { padding: 100px 0; background: #0f0f0f; text-align: center; }
-        .apk-card { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; max-width: 500px; margin: 0 auto; transition: all 0.3s ease; }
-        .apk-card:hover { transform: scale(1.02); background: rgba(20,255,236,0.1); }
+        .cta h2 { font-size: 42px; margin-bottom: 20px; }
+        .cta p { font-size: 18px; margin-bottom: 30px; color: #1a1a1a; }
+        .cta .btn { background: #1a1a1a; color: #14FFEC; }
         
         .footer { padding: 60px 0 40px; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.1); }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
         .footer-column h4 { margin-bottom: 20px; color: #14FFEC; }
-        .footer-column a { display: block; color: #888; text-decoration: none; margin-bottom: 10px; transition: all 0.3s ease; cursor: pointer; }
-        .footer-column a:hover { color: #14FFEC; transform: translateX(5px); }
+        .footer-column a { display: block; color: #888; text-decoration: none; margin-bottom: 10px; cursor: pointer; }
+        .footer-column a:hover { color: #14FFEC; }
         .footer-bottom { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); color: #888; }
         
         @media (max-width: 768px) {
@@ -105,6 +102,7 @@
             .section-title { font-size: 32px; }
             .header { flex-direction: column; }
             .nav { justify-content: center; }
+            .hero-grid { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -123,13 +121,36 @@
         </div>
     </div>
 
+    <!-- Hero Section with QR Code -->
     <div class="hero">
         <div class="container">
-            <h1>The #1 Fantasy Football App<br>For Nigerian Fans</h1>
-            <p>Build your dream team, compete with friends, and experience live matches like never before.</p>
-            <div class="hero-buttons">
-                <a href="#" class="btn" onclick="openApp()">Get Started →</a>
-                <a href="#features" class="btn btn-outline">Learn More</a>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>The #1 Fantasy Football App<br>For Nigerian Fans</h1>
+                    <p>Build your dream team, compete with friends, and experience live matches like never before.</p>
+                    <div>
+                        <a href="#" class="btn" onclick="openApp()">Get Started →</a>
+                        <a href="#features" class="btn btn-outline">Learn More</a>
+                    </div>
+                    <div class="qr-section">
+                        <p style="margin-top: 30px; color: #888; font-size: 14px;">Scan QR code to download on Android</p>
+                        <div class="qr-code" id="qrCode">
+                            <span>📱 QR Code<br>Download App</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="phone-mockup">
+                        <div class="screen">
+                            <div style="text-align: center;">
+                                <div style="font-size: 24px;">⚽</div>
+                                <div style="color: #14FFEC; font-size: 20px; margin: 10px 0;">Live: 2-1</div>
+                                <div>Man City vs Arsenal</div>
+                                <div style="margin-top: 15px; background: rgba(20,255,236,0.1); padding: 10px; border-radius: 10px;">Fantasy Points: 1,245</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -152,9 +173,9 @@
     <div id="how-it-works" class="how-it-works">
         <div class="container">
             <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">Get started in simple steps</p>
+            <p class="section-subtitle">Get started in three simple steps</p>
             <div class="steps-grid">
-                <div class="step"><div class="step-number">1</div><h3>Download App</h3><p>Get the app on your Android device</p></div>
+                <div class="step"><div class="step-number">1</div><h3>Download App</h3><p>Get the app from the QR code or download button</p></div>
                 <div class="step"><div class="step-number">2</div><h3>Create Account</h3><p>Sign up and choose your role</p></div>
                 <div class="step"><div class="step-number">3</div><h3>Build Team</h3><p>Pick players with £100m budget</p></div>
                 <div class="step"><div class="step-number">4</div><h3>Compete</h3><p>Climb the leaderboard</p></div>
@@ -189,8 +210,8 @@
     <!-- Modal -->
     <div id="pricingModal" class="modal">
         <div class="modal-content">
-            <h3 id="modalTitle">Upgrade Your Plan</h3>
-            <p>To activate the <span id="planName">Pro</span> plan, please make a bank transfer to the account below. Your account will automatically be upgraded once payment is confirmed.</p>
+            <h3>Upgrade Your Plan</h3>
+            <p>To activate the plan, please make a bank transfer to the account below.</p>
             <div class="bank-details">
                 <p><strong>Bank Name:</strong> Opay</p>
                 <p><strong>Account Number:</strong> 29752917</p>
@@ -208,24 +229,10 @@
         </div>
     </div>
 
-    <div id="download" class="download-section">
-        <div class="container">
-            <h2 class="section-title">Download Pitch Premier</h2>
-            <p class="section-subtitle">Get the app on your Android device</p>
-            <div class="apk-card">
-                <div class="feature-icon">📱</div>
-                <h3>Android App</h3>
-                <p style="margin:20px 0">Version 1.0.0 | ~50MB</p>
-                <a href="/pitch-premier.apk" class="btn" download>⬇️ Download App</a>
-                <p style="margin-top:20px; color:#888">Coming soon to iOS App Store</p>
-            </div>
-        </div>
-    </div>
-
     <div class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-column"><h4>Pitch Premier</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#download">Download</a></div>
+                <div class="footer-column"><h4>Pitch Premier</h4><a href="#features">Features</a><a href="#pricing">Pricing</a></div>
                 <div class="footer-column"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact Us</a></div>
                 <div class="footer-column"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
                 <div class="footer-column"><h4>Connect</h4><a href="#">Twitter</a><a href="#">Instagram</a></div>
@@ -235,30 +242,25 @@
     </div>
 
     <script>
-        // Smart redirect: Mobile -> App, Desktop -> Web App
+        // Smart redirect: Mobile -> App, Desktop -> Show QR/Download
         function openApp() {
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             
             if (isMobile) {
                 // On mobile: Try to open the native app
                 window.location.href = 'pitchpremier://login';
-                
                 // Fallback after 2 seconds if app not installed
                 setTimeout(function() {
-                    if (window.location.href.indexOf('pitchpremier') === -1) {
-                        alert('📱 App not installed? Download it from the Download section below.');
-                        document.getElementById('download').scrollIntoView({ behavior: 'smooth' });
-                    }
+                    alert('📱 Download the app from the QR code or Play Store to continue.');
                 }, 2000);
             } else {
-                // On desktop: Open the web app
-                window.open('https://pitch-premier-app.netlify.app', '_blank');
+                // On desktop: Show QR code section and download instructions
+                alert('📱 To use Pitch Premier:\n\n1. Scan the QR code with your phone\n2. Download the app from Play Store\n3. Sign in to start playing!');
+                document.querySelector('.qr-section').scrollIntoView({ behavior: 'smooth' });
             }
         }
         
         function showPricingModal(plan) {
-            document.getElementById('planName').innerText = plan;
-            document.getElementById('modalTitle').innerText = plan === 'Free' ? 'Free Plan' : 'Upgrade Your Plan';
             document.getElementById('pricingModal').style.display = 'flex';
         }
         
@@ -272,19 +274,6 @@
                 modal.style.display = 'none';
             }
         }
-        
-        // Scroll animation observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        document.querySelectorAll('.feature-card, .step, .role-card, .pricing-card').forEach(el => {
-            observer.observe(el);
-        });
     </script>
 </body>
 </html>
