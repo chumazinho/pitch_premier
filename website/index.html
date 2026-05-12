@@ -2,18 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pitch Premier - Fantasy Football App</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0a0a0a; color: white; line-height: 1.6; overflow-x: hidden; }
-        html { scroll-behavior: smooth; }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0a0a0a; color: white; line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
         .header { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: sticky; top: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(20,255,236,0.2); }
@@ -21,84 +14,25 @@
         .nav { display: flex; gap: 30px; align-items: center; flex-wrap: wrap; }
         .nav a { color: white; text-decoration: none; transition: all 0.3s ease; cursor: pointer; }
         .nav a:hover { color: #14FFEC; }
+        .nav .sign-in { background: transparent; border: 1px solid #14FFEC; padding: 8px 20px; border-radius: 25px; }
+        .nav .get-started { background: #14FFEC; color: #1a1a1a; padding: 8px 20px; border-radius: 25px; font-weight: bold; }
         
-        /* Smart Action Button */
-        .smart-action { display: inline-block; padding: 15px 40px; background: #14FFEC; color: #1a1a1a; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease; margin: 10px; cursor: pointer; border: none; font-size: 16px; }
-        .smart-action:hover { transform: translateY(-3px); background: #0D7377; color: white; }
-        .smart-action.secondary { background: transparent; border: 2px solid #14FFEC; color: #14FFEC; }
+        .hero { padding: 100px 0; text-align: center; background: linear-gradient(135deg,#0a0a0a 0%,#0D7377 100%); }
+        .hero h1 { font-size: 56px; margin-bottom: 20px; }
+        .hero p { font-size: 20px; color: #ccc; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
         
-        .hero { padding: 80px 0; text-align: center; background: linear-gradient(135deg,#0a0a0a 0%,#0D7377 100%); }
-        .hero h1 { font-size: 56px; margin-bottom: 20px; animation: fadeInUp 0.8s ease; }
-        .hero p { font-size: 20px; color: #ccc; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; animation: fadeInUp 0.8s ease 0.2s both; }
+        .btn { display: inline-block; padding: 15px 40px; background: #14FFEC; color: #1a1a1a; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease; margin: 10px; cursor: pointer; border: none; }
+        .btn:hover { transform: translateY(-3px); background: #0D7377; color: white; }
+        .btn-outline { background: transparent; border: 2px solid #14FFEC; color: #14FFEC; }
         
-        /* QR Code Section - Only shows on desktop */
-        .qr-section { display: none; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; margin-top: 30px; text-align: center; }
-        .qr-section.visible { display: block; animation: fadeInUp 0.6s ease; }
-        .qr-code { background: white; width: 180px; height: 180px; margin: 20px auto; border-radius: 20px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
-        .qr-code span { color: #0a0a0a; font-size: 14px; text-align: center; }
-        .qr-code .qr-placeholder { font-size: 48px; margin-bottom: 10px; }
-        
-        /* Mobile App Banner */
-        .mobile-banner { display: none; background: linear-gradient(135deg,#14FFEC,#0D7377); border-radius: 60px; padding: 12px 20px; margin: 20px auto; max-width: 400px; cursor: pointer; }
-        .mobile-banner.visible { display: flex; align-items: center; justify-content: space-between; animation: fadeInUp 0.6s ease; }
-        .mobile-banner-content { display: flex; align-items: center; gap: 12px; }
-        .mobile-banner-icon { font-size: 32px; }
-        .mobile-banner-text { text-align: left; }
-        .mobile-banner-text strong { font-size: 16px; }
-        .mobile-banner-text p { font-size: 12px; margin: 0; color: #1a1a1a; }
-        .mobile-banner-button { background: #1a1a1a; color: #14FFEC; padding: 8px 20px; border-radius: 30px; font-size: 14px; font-weight: bold; }
-        
-        .features { padding: 100px 0; background: #0f0f0f; }
-        .section-title { text-align: center; font-size: 42px; margin-bottom: 20px; }
-        .section-subtitle { text-align: center; color: #888; margin-bottom: 60px; font-size: 18px; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s ease; }
-        .feature-card:hover { transform: translateY(-10px); background: rgba(20,255,236,0.1); }
+        .download-section { padding: 80px 0; background: #0f0f0f; text-align: center; }
+        .apk-card { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; max-width: 500px; margin: 0 auto; }
         .feature-icon { font-size: 50px; margin-bottom: 20px; }
         
-        .how-it-works { padding: 100px 0; background: linear-gradient(135deg,#0D7377,#0a0a0a); }
-        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-top: 50px; }
-        .step { text-align: center; }
-        .step-number { width: 60px; height: 60px; background: #14FFEC; color: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 20px; }
-        
-        .roles { padding: 100px 0; background: #0f0f0f; }
-        .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
-        .role-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; }
-        .role-card.admin { border-top: 4px solid #FF6B6B; }
-        .role-card.fantasy { border-top: 4px solid #14FFEC; }
-        .role-card.fan { border-top: 4px solid #0D7377; }
-        .role-icon { font-size: 48px; margin-bottom: 20px; }
-        
-        .pricing { padding: 100px 0; background: #0a0a0a; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .pricing-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; cursor: pointer; transition: all 0.4s ease; }
-        .pricing-card:hover { transform: translateY(-10px); background: rgba(20,255,236,0.1); }
-        .pricing-card.featured { background: linear-gradient(135deg,rgba(20,255,236,0.1),rgba(13,115,119,0.1)); border: 1px solid #14FFEC; }
-        .price { font-size: 48px; font-weight: bold; margin: 20px 0; }
-        .price small { font-size: 16px; }
-        .pricing-card ul { list-style: none; margin: 30px 0; }
-        .pricing-card li { padding: 8px 0; color: #ccc; }
-        
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: #1a1a1a; max-width: 400px; width: 90%; padding: 30px; border-radius: 20px; text-align: center; border: 1px solid #14FFEC; }
-        .modal-content .bank-details { background: #0a0a0a; padding: 15px; border-radius: 12px; margin: 20px 0; text-align: left; }
-        .close-modal { background: #14FFEC; color: #1a1a1a; border: none; padding: 10px 30px; border-radius: 25px; cursor: pointer; margin-top: 15px; }
-        
-        .cta { padding: 100px 0; text-align: center; background: linear-gradient(135deg,#0D7377,#14FFEC); }
-        .cta h2 { font-size: 42px; margin-bottom: 20px; }
-        .cta p { font-size: 18px; margin-bottom: 30px; color: #1a1a1a; }
-        .cta .smart-action { background: #1a1a1a; color: #14FFEC; }
-        
-        .footer { padding: 60px 0 40px; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.1); }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
-        .footer-column h4 { margin-bottom: 20px; color: #14FFEC; }
-        .footer-column a { display: block; color: #888; text-decoration: none; margin-bottom: 10px; cursor: pointer; }
-        .footer-column a:hover { color: #14FFEC; }
-        .footer-bottom { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); color: #888; }
+        .footer { padding: 60px 0 40px; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #888; }
         
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
-            .section-title { font-size: 32px; }
             .header { flex-direction: column; }
             .nav { justify-content: center; }
         }
@@ -109,36 +43,10 @@
         <div class="header">
             <div class="logo">⚽ PITCH PREMIER</div>
             <div class="nav">
-                <a href="#features">Features</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#roles">Roles</a>
-                <a href="#pricing">Pricing</a>
+                <a href="#download">Download</a>
+                <a href="#" class="sign-in" onclick="openApp()">Sign In</a>
+                <a href="#" class="get-started" onclick="openApp()">Get Started</a>
             </div>
-        </div>
-    </div>
-
-    <!-- Mobile App Banner (only shows on mobile) -->
-    <div id="mobileBanner" class="mobile-banner" onclick="openApp()">
-        <div class="mobile-banner-content">
-            <div class="mobile-banner-icon">📱</div>
-            <div class="mobile-banner-text">
-                <strong id="bannerAction">Open in App</strong>
-                <p>Get the best experience</p>
-            </div>
-        </div>
-        <div class="mobile-banner-button" id="bannerButton">Open</div>
-    </div>
-
-    <!-- QR Section (only shows on desktop) -->
-    <div id="qrSection" class="qr-section">
-        <div class="container">
-            <h3>📱 Continue on Mobile</h3>
-            <p style="margin-bottom: 10px;">Scan QR code to download the app</p>
-            <div class="qr-code">
-                <div class="qr-placeholder">📱⬇️</div>
-                <span>Scan to download<br>Pitch Premier</span>
-            </div>
-            <p style="margin-top: 15px; font-size: 14px; color: #888;">Or continue browsing to learn more</p>
         </div>
     </div>
 
@@ -147,203 +55,41 @@
             <h1>The #1 Fantasy Football App<br>For Nigerian Fans</h1>
             <p>Build your dream team, compete with friends, and experience live matches like never before.</p>
             <div>
-                <button class="smart-action" id="mainActionBtn" onclick="handleMainAction()">Get Started →</button>
-                <a href="#features" class="smart-action secondary">Learn More</a>
+                <a href="#" class="btn" onclick="openApp()">Get Started →</a>
+                <a href="#download" class="btn btn-outline">Learn More</a>
             </div>
         </div>
     </div>
 
-    <div id="features" class="features">
+    <div id="download" class="download-section">
         <div class="container">
-            <h2 class="section-title">Everything you need to dominate</h2>
-            <p class="section-subtitle">We've built all the essential tools into one cohesive platform</p>
-            <div class="features-grid">
-                <div class="feature-card"><div class="feature-icon">⚡</div><h3>Live Match Updates</h3><p>Real-time scores with goal notifications</p></div>
-                <div class="feature-card"><div class="feature-icon">🏆</div><h3>Build Your Team</h3><p>Start with £100m budget</p></div>
-                <div class="feature-card"><div class="feature-icon">📊</div><h3>Track Performance</h3><p>Monitor player points and climb leaderboard</p></div>
-                <div class="feature-card"><div class="feature-icon">📰</div><h3>Latest News</h3><p>Transfer news, injuries, match previews</p></div>
-                <div class="feature-card"><div class="feature-icon">🔴</div><h3>Live Scores</h3><p>Watch scores update in real-time</p></div>
-                <div class="feature-card"><div class="feature-icon">🎬</div><h3>Match Highlights</h3><p>Watch YouTube highlights directly</p></div>
+            <h2>Download Pitch Premier</h2>
+            <p>Get the app on your Android device</p>
+            <div class="apk-card">
+                <div class="feature-icon">📱</div>
+                <h3>Android App</h3>
+                <p style="margin:20px 0">Version 1.0.0 | ~50MB</p>
+                <a href="/pitch-premier.apk" class="btn" download>⬇️ Download App</a>
+                <p style="margin-top:20px; color:#888">Coming soon to iOS App Store</p>
             </div>
-        </div>
-    </div>
-
-    <div id="how-it-works" class="how-it-works">
-        <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">Get started in simple steps</p>
-            <div class="steps-grid">
-                <div class="step"><div class="step-number">1</div><h3>Download App</h3><p>Get the app on your Android device</p></div>
-                <div class="step"><div class="step-number">2</div><h3>Create Account</h3><p>Sign up and choose your role</p></div>
-                <div class="step"><div class="step-number">3</div><h3>Build Team</h3><p>Pick players with £100m budget</p></div>
-                <div class="step"><div class="step-number">4</div><h3>Compete</h3><p>Climb the leaderboard</p></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="roles" class="roles">
-        <div class="container">
-            <h2 class="section-title">Choose Your Role</h2>
-            <p class="section-subtitle">Three ways to experience Pitch Premier</p>
-            <div class="roles-grid">
-                <div class="role-card admin"><div class="role-icon">👑</div><h3>Admin</h3><p>Manage users, update scores, add news</p></div>
-                <div class="role-card fantasy"><div class="role-icon">🏆</div><h3>Fantasy Manager</h3><p>Build team, manage transfers, compete</p></div>
-                <div class="role-card fan"><div class="role-icon">⚽</div><h3>Fan</h3><p>Follow live matches, read news</p></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="pricing" class="pricing">
-        <div class="container">
-            <h2 class="section-title">Simple, Transparent Pricing</h2>
-            <p class="section-subtitle">Choose the plan that fits your needs</p>
-            <div class="pricing-grid">
-                <div class="pricing-card" onclick="showPricingModal('Free')"><h3>Free</h3><div class="price">₦0</div><ul><li>✅ Basic Fantasy Team</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li></ul><button class="smart-action secondary" onclick="event.stopPropagation(); handleMainAction()" style="margin-top: 20px;">Get Started</button></div>
-                <div class="pricing-card featured" onclick="showPricingModal('Pro')"><h3>Pro</h3><div class="price">₦3,000<small>/mo</small></div><ul><li>✅ Unlimited Fantasy Teams</li><li>✅ Live Match Scores</li><li>✅ News & Updates</li><li>✅ Advanced Analytics</li></ul><button class="smart-action" onclick="event.stopPropagation(); showPricingModal('Pro')" style="margin-top: 20px;">Start Free Trial</button></div>
-                <div class="pricing-card" onclick="showPricingModal('Enterprise')"><h3>Enterprise</h3><div class="price">Custom</div><ul><li>✅ Everything in Pro</li><li>✅ API Access</li><li>✅ Dedicated Support</li></ul><button class="smart-action secondary" onclick="event.stopPropagation(); showPricingModal('Enterprise')" style="margin-top: 20px;">Contact Sales</button></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="pricingModal" class="modal">
-        <div class="modal-content">
-            <h3>Upgrade Your Plan</h3>
-            <p>To activate the plan, please make a bank transfer to the account below.</p>
-            <div class="bank-details">
-                <p><strong>Bank Name:</strong> Opay</p>
-                <p><strong>Account Number:</strong> 29752917</p>
-                <p><strong>Account Name:</strong> Ugobueze Chukwuma</p>
-            </div>
-            <button class="close-modal" onclick="closeModal()">Close</button>
-        </div>
-    </div>
-
-    <div class="cta">
-        <div class="container">
-            <h2>Ready to dominate your league?</h2>
-            <p>Join thousands of fantasy football managers modernizing their experience with Pitch Premier.</p>
-            <button class="smart-action" onclick="handleMainAction()">Create Free Account →</button>
         </div>
     </div>
 
     <div class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column"><h4>Pitch Premier</h4><a href="#features">Features</a><a href="#pricing">Pricing</a></div>
-                <div class="footer-column"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact Us</a></div>
-                <div class="footer-column"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
-                <div class="footer-column"><h4>Connect</h4><a href="#">Twitter</a><a href="#">Instagram</a></div>
-            </div>
-            <div class="footer-bottom"><p>&copy; 2025 Pitch Premier. All rights reserved.</p><p>Built with Flutter & Supabase</p></div>
+            <p>&copy; 2025 Pitch Premier. All rights reserved.</p>
+            <p style="margin-top: 10px;">Built with Flutter & Supabase</p>
         </div>
     </div>
 
     <script>
-        // Detect if user is on mobile or desktop
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-        const isDesktop = !isMobile;
-        
-        // Elements
-        const mobileBanner = document.getElementById('mobileBanner');
-        const qrSection = document.getElementById('qrSection');
-        const bannerAction = document.getElementById('bannerAction');
-        const bannerButton = document.getElementById('bannerButton');
-        const mainActionBtn = document.getElementById('mainActionBtn');
-        
-        // Check if app is installed (by trying to open deep link)
-        let appInstalled = false;
-        
-        function checkAppInstalled() {
-            return new Promise((resolve) => {
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = 'pitchpremier://check';
-                document.body.appendChild(iframe);
-                
-                setTimeout(() => {
-                    document.body.removeChild(iframe);
-                    resolve(false);
-                }, 500);
-            });
-        }
-        
         function openApp() {
+            // Try to open the app
             window.location.href = 'pitchpremier://login';
-            setTimeout(() => {
-                // If still here after 2 seconds, app not installed
-                if (!document.hidden) {
-                    if (isMobile) {
-                        alert('📱 App not installed? Download the app to continue.');
-                        window.location.href = '/pitch-premier.apk';
-                    }
-                }
+            // Fallback after 2 seconds if app not installed
+            setTimeout(function() {
+                document.getElementById('download').scrollIntoView({ behavior: 'smooth' });
             }, 2000);
-        }
-        
-        function downloadApp() {
-            window.location.href = '/pitch-premier.apk';
-        }
-        
-        function handleMainAction() {
-            if (isMobile) {
-                openApp();
-            } else {
-                // On desktop, show QR section and scroll to it
-                qrSection.classList.add('visible');
-                qrSection.scrollIntoView({ behavior: 'smooth' });
-                
-                // Also show a tooltip
-                const msg = document.createElement('div');
-                msg.innerHTML = '📱 Scan QR code with your phone to download the app';
-                msg.style.position = 'fixed';
-                msg.style.bottom = '20px';
-                msg.style.left = '50%';
-                msg.style.transform = 'translateX(-50%)';
-                msg.style.background = '#14FFEC';
-                msg.style.color = '#1a1a1a';
-                msg.style.padding = '12px 24px';
-                msg.style.borderRadius = '50px';
-                msg.style.zIndex = '9999';
-                msg.style.fontWeight = 'bold';
-                document.body.appendChild(msg);
-                setTimeout(() => msg.remove(), 3000);
-            }
-        }
-        
-        // Setup based on device
-        if (isMobile) {
-            // Mobile: Show "Open App" banner
-            mobileBanner.classList.add('visible');
-            bannerAction.innerHTML = 'Open in App';
-            bannerButton.innerHTML = 'Open';
-            
-            // Check if app installed (optional)
-            checkAppInstalled().then(installed => {
-                appInstalled = installed;
-                if (!appInstalled) {
-                    bannerAction.innerHTML = 'Get the App';
-                    bannerButton.innerHTML = 'Download';
-                }
-            });
-        } else {
-            // Desktop: Show QR code
-            qrSection.classList.add('visible');
-        }
-        
-        function showPricingModal(plan) {
-            document.getElementById('pricingModal').style.display = 'flex';
-        }
-        
-        function closeModal() {
-            document.getElementById('pricingModal').style.display = 'none';
-        }
-        
-        window.onclick = function(event) {
-            var modal = document.getElementById('pricingModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
         }
     </script>
 </body>
