@@ -235,11 +235,12 @@
     </div>
 
     <script>
-        // Smart redirect: Mobile -> App, Desktop -> Web App
+        // Smart redirect: Mobile -> App, Desktop -> Message
         function openApp() {
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             
             if (isMobile) {
+                // On mobile: Try to open the native app
                 window.location.href = 'pitchpremier://login';
                 setTimeout(function() {
                     if (window.location.href.indexOf('pitchpremier') === -1) {
@@ -248,7 +249,8 @@
                     }
                 }, 2000);
             } else {
-                window.open('https://pitch-premier-app.netlify.app', '_blank');
+                // On desktop: Show message to use mobile
+                alert('📱 Please visit this site on your mobile device to use the Pitch Premier app, or download the app from the Download section.');
             }
         }
         
